@@ -1,0 +1,54 @@
+body{
+    display: flex;
+    flex-direction: column;
+    margin: 0;
+    padding: 0;
+    height: 100vh;
+    background:linear-gradient(#2e323d ,#3283a8);
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}
+
+.containerPlayers{
+    display: flex;
+    justify-content: center;
+    margin: 40px;
+}
+
+.iconoJugador{
+    margin-right: 20px;
+    margin-left: 20px;
+    width: 50px;
+    height: 50px;
+    background-color: #c5d4f0;
+    border-radius: 33%;
+}
+
+
+.containerLetra{
+    display: flex;
+}
+
+.containerTiempo{
+    display:flex;
+}
+
+.containerLista{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    color: #fff;
+}
+
+.containerPalabras{
+    margin-top: 20px;
+    margin-bottom: 50px;
+    width: 250px;
+    height: 500px;
+    background-color: #fff;
+    color: #000;
+}
+
+input{
+    width: 100px;
+    height: 20px;
+}
