@@ -41,7 +41,7 @@ body{
 
 .containerPalabras{
     margin-top: 20px;
-    margin-bottom: 50px;
+    margin-bottom: 25px;
     width: 250px;
     height: 500px;
     background-color: #fff;
@@ -51,4 +51,11 @@ body{
 input{
     width: 100px;
     height: 20px;
+}
+
+#botonEnviar{
+    width: 60px;
+    height: 30px;
+    background-color: #25b864;
+    border: #fff;
 }
