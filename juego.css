@@ -11,7 +11,7 @@ body{
 .containerPlayers{
     display: flex;
     justify-content: center;
-    margin: 40px;
+    margin: 20px;
 }
 
 .iconoJugador{
@@ -28,8 +28,17 @@ body{
     display: flex;
 }
 
+.containerLetra > p{
+    font-size: 25px;
+    
+}
+
 .containerTiempo{
     display:flex;
+}
+
+.containerTiempo{
+    font-size: 25px;
 }
 
 .containerLista{
@@ -40,17 +49,16 @@ body{
 }
 
 .containerPalabras{
-    margin-top: 20px;
     margin-bottom: 25px;
     width: 250px;
-    height: 500px;
+    height: 450px;
     background-color: #fff;
     color: #000;
 }
 
 input{
-    width: 100px;
-    height: 20px;
+    width: 110px;
+    height: 28px;
 }
 
 #botonEnviar{
@@ -58,4 +66,5 @@ input{
     height: 30px;
     background-color: #25b864;
     border: #fff;
+    border-radius: 23%;
 }
