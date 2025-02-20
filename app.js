@@ -7,6 +7,7 @@ let iconoJugador4 = document.getElementById("4")
 
 // manejo de turnos
 let elementoTiempo = document.getElementById("tiempo");
+let elementoLetra = document.getElementById("letra")
 let tiempo = 60
 let turno = 0
 let contador
@@ -18,7 +19,7 @@ function contadorTiempo() {
         clearInterval(contador); 
         return
     }
-
+    elementoLetra.textContent = generarLetra()
     turno++
     turnos(turno)
     tiempo = 60
@@ -30,7 +31,13 @@ function contadorTiempo() {
             clearInterval(contador); 
             contadorTiempo()
         }
-    }, 100) 
+    }, 1000) 
+}
+
+//general letra aleatoria
+
+function generarLetra() {
+    return String.fromCharCode(97 + Math.floor(Math.random() * 26));
 }
 
 // cambiar estado de icono del jugador
@@ -47,5 +54,20 @@ function turnos(turno) {
 // Iniciar el primer turno
 contadorTiempo()
 
+// input con la palabra
+let elementoPalabra = document.getElementById("inputPalabra")
 
+//array con las palabras ingresadas
+let listaPalabras = []
 
+// obtener las palabras ingresadas filtrando las palabras que sean ! == null
+
+function obtenerPalabra() {
+    let palabra = elementoPalabra.value
+    elementoPalabra.value = ""
+    if(palabra.startsWith(elementoLetra.textContent)){
+        listaPalabras.push(palabra)
+    }
+    listaPalabras = listaPalabras.filter(item => item !== "");
+    console.log(listaPalabras);
+}
