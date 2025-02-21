@@ -56,11 +56,20 @@ body{
 }
 
 .containerPalabras{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     margin-bottom: 25px;
     width: 250px;
     height: 450px;
     background-color: #fff;
     color: #000;
+}
+
+.containerPalabras>p{
+    font-size: 15px;
+    margin: 0px;
+    color:#2e323d;
 }
 
 input{

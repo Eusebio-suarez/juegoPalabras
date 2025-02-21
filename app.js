@@ -19,6 +19,9 @@ let ganador = `jugador ${turno}`
 // input con la palabra
 let elementoPalabra = document.getElementById("inputPalabra")
 
+// contenedor de las palabras ingresadas por el usuario
+let contenedorPalabras = document.getElementById("containerPalabras")
+
 ////array con las palabras ingresadas
 let listaPalabras = []
 
@@ -39,10 +42,11 @@ function contadorTiempo() {
         tiempo--
 
         if (tiempo < 0) {
+            contenedorPalabras.innerHTML = ""
             clearInterval(contador); 
             contadorTiempo()
         }
-    }, 200)
+    }, 1000)
 }
 
 //general letra aleatoria
@@ -65,6 +69,7 @@ function turnos(turno) {
 // obtener las palabras ingresadas filtrando las palabras que sean ! == null
 function obtenerPalabra() {
     let palabra = elementoPalabra.value
+    palabra = palabra.toLowerCase();
     elementoPalabra.value = ""
     if(palabra.startsWith(elementoLetra.textContent)){
         listaPalabras.push(palabra)
@@ -72,13 +77,28 @@ function obtenerPalabra() {
     listaPalabras = listaPalabras.filter(item => item !== "");
     listaPalabras = [...new Set(listaPalabras)];
     console.log(listaPalabras);
+    mostrarPalabras()
 }
+
+// montrar las palabras ingresadas por el usuario
+function mostrarPalabras() {
+    contenedorPalabras.innerHTML = ""; 
+
+    listaPalabras.forEach(palabra => {
+        let parrafo = document.createElement("p");
+        parrafo.textContent = palabra;
+        contenedorPalabras.appendChild(parrafo);
+    });
+}
+
 
 let palabrasMax=0
 
 // obtener el ganador del juego validadndo el tamaño del array
 function obtenerGanador() {
     let palabrasIngresadas =listaPalabras.length
+    console.log(palabrasIngresadas+` palabras en el turno ${turno}`);
+    
     if (palabrasIngresadas>palabrasMax) {
         palabrasMax=palabrasIngresadas
         ganador=`jugador ${turno}`
