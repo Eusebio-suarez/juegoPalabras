@@ -30,7 +30,14 @@ body{
 
 .containerLetra > p{
     font-size: 25px;
-    
+}
+
+.containerGanador{
+    display: flex;
+}
+
+.containerGanador >p{
+    font-size: 25px;
 }
 
 .containerTiempo{
