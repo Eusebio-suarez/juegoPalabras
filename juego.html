@@ -8,6 +8,17 @@
     <title>Juego de palabras</title>
 </head>
 <body>
+    <div class="containerLogo">
+        <img id="logo" src="Assets/icons/logo.png" alt=logo">
+        <P>Juego de palabras</P>
+        <select name="número de jugadores" id="selectplayers">
+            <option value="2">2 jugadores</option>
+            <option value="3">3 jugadores</option>
+            <option value="4">4 jugadores</option>
+        </select>
+        <button onclick="contadorTiempo(numeroJugadores)" href="juego.html" type="button" class="btn btn-primary">Empezar</button>
+    </div>
+    <main>
     <div class="containerPlayers">
         <img src="Assets/img/uno.png" alt="jugadorUno" class="iconoJugador" id="1">
         <img src="Assets/img/dos.png" alt="jugadorDos" class="iconoJugador" id="2">
@@ -34,6 +45,7 @@
             <button type="button" id="botonEnviar" onclick="obtenerPalabra()">Enviar</button>
         </div>
     </div>
+    </main>
     <script src="app.js"></script>
 </body>
 </html>

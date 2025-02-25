@@ -5,6 +5,26 @@ let iconoJugador3 = document.getElementById("3")
 let iconoJugador4 = document.getElementById("4")
 
 
+//jugadores seleccionados
+let elementoJugadores = document.querySelector("#selectplayers")
+let numeroJugadores = elementoJugadores.value
+
+// cambiar la visibilidad de los contenedores de los jugadores
+function cambiarVisibilidad(numeroJugadores){
+    document.getElementById("1").style.display = numeroJugadores >= 1 ? "inline" : "none";
+    document.getElementById("2").style.display = numeroJugadores >= 2 ? "inline" : "none";
+    document.getElementById("3").style.display = numeroJugadores >= 3 ? "inline" : "none";
+    document.getElementById("4").style.display = numeroJugadores >= 4 ? "inline" : "none";
+}
+
+//evento cambiar opcion de jugadores
+elementoJugadores.addEventListener("change", ()=>{
+    numeroJugadores = elementoJugadores.value
+    cambiarVisibilidad(numeroJugadores)
+    console.log(numeroJugadores);
+})
+
+
 // manejo de turnos
 let elementoTiempo = document.getElementById("tiempo");
 let elementoLetra = document.getElementById("letra")
@@ -26,27 +46,36 @@ let contenedorPalabras = document.getElementById("containerPalabras")
 let listaPalabras = []
 
 //cronometro de 60 segundos para los 4 turnos
-function contadorTiempo() {
-    if (turno >= 5) {  
+function contadorTiempo(numeroJugadores) {
+    document.querySelector(".containerLogo").style.display = "none";
+    document.querySelector("main").style.display = "flex";
+    cambiarVisibilidad(numeroJugadores)
+    if (turno >= numeroJugadores) {  
         clearInterval(contador); 
-        return
+        obtenerGanador();
+        return;
     }
-    obtenerGanador()
-    elementoLetra.textContent = generarLetra()
-    listaPalabras = []
-    turno++
-    turnos(turno)
-    tiempo = 60
+
+    elementoLetra.textContent = generarLetra();
+    listaPalabras = [];
+    turno++;
+    turnos(turno);
+    tiempo = 60;
+
     contador = setInterval(() => {
-        elementoTiempo.textContent = `${tiempo} segundos`
-        tiempo--
+        elementoTiempo.textContent = `${tiempo} segundos`;
+        tiempo--;
 
         if (tiempo < 0) {
-            contenedorPalabras.innerHTML = ""
-            clearInterval(contador); 
-            contadorTiempo()
+            clearInterval(contador);
+            obtenerGanador();
+            contenedorPalabras.innerHTML = "";
+
+            if (turno < numeroJugadores) {
+                contadorTiempo(numeroJugadores);
+            }
         }
-    }, 1000)
+    }, 1000);  
 }
 
 //general letra aleatoria
@@ -57,14 +86,17 @@ function generarLetra() {
 
 // cambiar estado de icono del jugador
 function turnos(turno) {
-    let turnoAnterior = turno-1
-    let jugador = document.getElementById(turno)
-    let jugadorAnterior = document.getElementById(turnoAnterior)
-    jugador.style.backgroundColor = "#25b864"
-    if(turno>=2){
-    jugadorAnterior.style.backgroundColor = "#fff"
+    // Restauramos el color de fondo de todos los jugadores
+    let iconosJugadores = document.querySelectorAll(".iconoJugador");
+    iconosJugadores.forEach(icono => icono.style.backgroundColor = "#c5d4f0");
+
+    // Resaltamos el jugador actual con un color más llamativo
+    let jugadorActivo = document.getElementById(turno);
+    if (jugadorActivo) {
+        jugadorActivo.style.backgroundColor = "#25b864"; // Verde para indicar turno activo
     }
 }
+
 
 // obtener las palabras ingresadas filtrando las palabras que sean ! == null
 function obtenerPalabra() {
@@ -97,18 +129,15 @@ let palabrasMax=0
 // obtener el ganador del juego validadndo el tamaño del array
 function obtenerGanador() {
     let palabrasIngresadas =listaPalabras.length
-    console.log(palabrasIngresadas+` palabras en el turno ${turno}`);
-    
+    if(turno>=1){
+        alert(palabrasIngresadas+` palabras en el turno ${turno}`);
+    }    
     if (palabrasIngresadas>palabrasMax) {
         palabrasMax=palabrasIngresadas
         ganador=`jugador ${turno}`
     }
-    if (turno >= 4) {  
+    if (turno >= numeroJugadores) {  
         console.log("hola fin");
         elementoGanador.textContent = ganador
     }
-    
 }
-
-// Iniciar el primer turno
-contadorTiempo()
